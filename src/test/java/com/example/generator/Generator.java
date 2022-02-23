@@ -37,12 +37,6 @@ public class Generator {
         public static void main(String[] args) throws SQLException {
                 // before();
 
-                new DataSourceConfig.Builder(
-                                "jdbc:mysql://127.0.0.1:3306/benkyou?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true",
-                                "root",
-                                "lixunsam")
-                                                .build();
-
                 FastAutoGenerator.create(DATA_SOURCE_CONFIG)
                                 .globalConfig((scanner, builder) -> builder
                                                 .author(scanner.apply("请输入作者名称"))
