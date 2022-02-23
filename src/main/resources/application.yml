@@ -15,7 +15,7 @@ spring:
   #       - classpath:/templates/
   #       - classpath:/resources/
   #       - classpath:/static/
-      # - classpath:/public/
+  # - classpath:/public/
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
@@ -34,5 +34,10 @@ spring:
       max-active: 20
       max-wait: 60000
 
-# 
+# 输出 SQL
+logging:
+  level:
+    com.example.mapper: debug
+
+# dir
 key: Summer Pockets
