@@ -1,6 +1,7 @@
 package com.example.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -14,7 +15,8 @@ public class MvcConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .allowedOriginPatterns("*")
-                .allowCredentials(true);
+                .allowCredentials(true)
+                .maxAge(3600); // 一小时内不需要再预检
     }
 
     @Override
@@ -22,9 +24,8 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/")
                 .addResourceLocations("classpath:/templates/");
-        //映射图片保存地址
+        // 映射图片保存地址
         // registry.addResourceHandler("/img/**").addResourceLocations("file:D:/bysj/pljyd/src/main/resources/static/img/");
     }
-
 
 }
