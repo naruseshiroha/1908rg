@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import com.example.entity.Ebook;
 import com.example.service.IEbookService;
+import com.example.utils.JsonResult;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,14 +28,19 @@ public class EbookController {
     private IEbookService ebookService;
 
     @GetMapping("/findAllEbook")
-    public List<Ebook> findAllEbook(Ebook ebook) {
-        return ebookService.findAllEbook(ebook);
+    public JsonResult<List<Ebook>> findAllEbook(Ebook ebook) {
+        JsonResult<List<Ebook>> json = new JsonResult<>(200, "查询成功");
+        json.setData(ebookService.findAllEbook(ebook));
+        // Ebook ebook = ebookService.findEbookById(id);
+        return json;
     }
 
     @GetMapping("/findEbook")
-    public Ebook findEbookById(Long id) {
+    public JsonResult<Ebook> findEbookById(Long id) {
+        JsonResult<Ebook> json = new JsonResult<>(200, "查询成功");
+        json.setData(ebookService.findEbookById(id));
         // Ebook ebook = ebookService.findEbookById(id);
-        return ebookService.findEbookById(id);
+        return json;
     }
 
 }
