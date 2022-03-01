@@ -1,6 +1,6 @@
-package com.example.entity;
+package com.example.req;
 
-public class EbookResp {
+public class EbookReq {
 
     /**
      * <p>
