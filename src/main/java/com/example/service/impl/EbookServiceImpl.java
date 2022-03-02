@@ -5,13 +5,12 @@ import com.example.mapper.EbookMapper;
 import com.example.req.EbookReq;
 import com.example.resp.EbookResp;
 import com.example.service.IEbookService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
@@ -44,6 +43,20 @@ public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook> implements
         }).collect(Collectors.toList());
 
         return ebookResps;
+    }
+
+    public boolean save(EbookResp ebookResp) {
+        Ebook ebook = new Ebook();
+        boolean flag = false;
+        BeanUtils.copyProperties(ebook, ebookResp);
+        if (ObjectUtils.isEmpty(ebookResp.getId())) {
+            // 新增
+            flag = baseMapper.insert(ebook) > 0 ? true : false;
+        } else {
+            // 更新
+            flag = baseMapper.updateById(ebook) > 0 ? true : false;
+        }
+        return flag;
     }
 
 }

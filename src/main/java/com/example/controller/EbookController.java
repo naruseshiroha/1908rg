@@ -13,8 +13,12 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 
 /**
@@ -37,6 +41,13 @@ public class EbookController {
         JsonResult<PageInfo<EbookResp>> json = new JsonResult<>(200, "查询成功");
         json.setData(PageHelper.startPage(ebookReq.getPageNum(), ebookReq.getPageSize())
                 .doSelectPageInfo(() -> ebookService.findAllEbook(ebookReq)));
+        return json;
+    }
+
+    @PostMapping("/save")
+    public JsonResult<Boolean> save(@RequestBody EbookResp ebookResp) {
+        JsonResult<Boolean> json = new JsonResult<>(200, "查询成功");
+        json.setData(ebookService.save(ebookResp));
         return json;
     }
 

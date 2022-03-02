@@ -19,4 +19,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IEbookService extends IService<Ebook> {
     List<EbookResp> findAllEbook(EbookReq ebookReq);
+
+    boolean save(EbookResp ebookResp);
 }
