@@ -1,29 +1,29 @@
 package com.example.req;
 
 public class PageReq {
-    private int page;
+    private int pageNum;
 
-    private int size;
+    private int pageSize;
 
-    public int getPage() {
-        return page;
+    public int getPageNum() {
+        return pageNum;
     }
 
-    public void setPage(int page) {
-        this.page = page;
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
     }
 
-    public int getSize() {
-        return size;
+    public int getPageSize() {
+        return pageSize;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
     @Override
     public String toString() {
-        return "PageReq [page=" + page + ", size=" + size + "]";
+        return "PageReq [pageNum=" + pageNum + ", pageSize=" + pageSize + "]";
     }
 
 }

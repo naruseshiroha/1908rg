@@ -39,8 +39,7 @@ logging:
   level:
     com:
       example:
-        mapper: trace
-        # mapper: debug
-
+        # mapper: trace
+        mapper: debug
 # dir
 # key: Summer Pockets

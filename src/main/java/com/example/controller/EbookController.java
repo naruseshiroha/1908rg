@@ -10,10 +10,11 @@ import com.example.resp.EbookResp;
 import com.example.service.IEbookService;
 import com.example.utils.JsonResult;
 import com.github.pagehelper.PageHelper;
-
+import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 
 /**
  * <p>
@@ -30,20 +31,15 @@ public class EbookController {
     @Resource
     private IEbookService ebookService;
 
-    // @GetMapping("/findAllEbook")
-    // public JsonResult<List<Ebook>> findAllEbook(Ebook ebook) {
-    //     JsonResult<List<Ebook>> json = new JsonResult<>(200, "查询成功");
-    //     json.setData(ebookService.findAllEbook(ebook));
-    //     // Ebook ebook = ebookService.findEbookById(id);
-    //     return json;
-    // }
-
     @GetMapping("/findAllEbook")
-    public JsonResult<List<EbookResp>> findAllEbook(EbookReq ebookReq) {
-        JsonResult<List<EbookResp>> json = new JsonResult<>(200, "查询成功");
-        json.setData(ebookService.findAllEbook(ebookReq));
-        // Ebook ebook = ebookService.findEbookById(id);
-        return json;
+    public JsonResult<PageInfo<EbookResp>> findAllEbook(EbookReq ebookReq) {
+        // JsonResult<PageInfo<EbookResp>> json = new JsonResult<>(200, "查询成功");
+        // List<EbookResp> ebookResps = ebookService.findAllEbook(ebookReq);
+        // PageInfo<EbookResp> pageInfo = new PageInfo<>(ebookResps);
+        // json.setData(pageInfo);
+        // return json;
+
+        return null;
     }
 
 }
