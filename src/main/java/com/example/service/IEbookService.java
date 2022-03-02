@@ -1,6 +1,9 @@
 package com.example.service;
 
 import com.example.entity.Ebook;
+import com.example.req.EbookReq;
+import com.example.resp.EbookResp;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -15,5 +18,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-02-23
  */
 public interface IEbookService extends IService<Ebook> {
-    List<Ebook> findAllEbook(Ebook bEbook);
+    List<EbookResp> findAllEbook(EbookReq ebookReq);
 }

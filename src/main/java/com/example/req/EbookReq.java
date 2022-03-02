@@ -1,6 +1,6 @@
 package com.example.req;
 
-public class EbookReq {
+public class EbookReq extends PageReq {
 
     /**
      * <p>
@@ -112,6 +112,8 @@ public class EbookReq {
                 ", docCount=" + docCount +
                 ", viewCount=" + viewCount +
                 ", voteCount=" + voteCount +
+                ", page=" + super.getPage() +
+                ", size=" + super.getSize() +
                 "}";
     }
 }

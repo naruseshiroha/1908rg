@@ -37,7 +37,10 @@ spring:
 # 输出 SQL
 logging:
   level:
-    com.example.mapper: debug
+    com:
+      example:
+        mapper: trace
+        # mapper: debug
 
 # dir
-key: Summer Pockets
+# key: Summer Pockets
