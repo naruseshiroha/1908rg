@@ -33,13 +33,12 @@ public class EbookController {
 
     @GetMapping("/findAllEbook")
     public JsonResult<PageInfo<EbookResp>> findAllEbook(EbookReq ebookReq) {
-        // JsonResult<PageInfo<EbookResp>> json = new JsonResult<>(200, "查询成功");
-        // List<EbookResp> ebookResps = ebookService.findAllEbook(ebookReq);
-        // PageInfo<EbookResp> pageInfo = new PageInfo<>(ebookResps);
-        // json.setData(pageInfo);
-        // return json;
+        JsonResult<PageInfo<EbookResp>> json = new JsonResult<>(200, "查询成功");
+        // List<EbookResp> ebookResps = 
+        PageInfo<EbookResp> pageInfo = ebookService.findAllEbook(ebookReq);
+        json.setData(pageInfo);
+        return json;
 
-        return null;
     }
 
 }

@@ -33,7 +33,7 @@ import org.springframework.stereotype.Service;
 public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook> implements IEbookService {
 
     @Override
-    public List<EbookResp> findAllEbook(EbookReq ebookReq) {
+    public PageInfo<EbookResp> findAllEbook(EbookReq ebookReq) {
         PageHelper.startPage(ebookReq.getPageNum(), ebookReq.getPageSize());
         // Page<Ebook> page = new Page<>(ebookReq.getPageNum(), ebookReq.getPageSize());
         LambdaQueryWrapper<Ebook> lqw = new LambdaQueryWrapper<>();
@@ -48,7 +48,9 @@ public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook> implements
             return ebookResp;
         }).collect(Collectors.toList());
 
-        return ebookResps;
+        PageInfo<EbookResp> pageInfo = new PageInfo<>(ebookResps);
+
+        return pageInfo;
     }
 
 }
