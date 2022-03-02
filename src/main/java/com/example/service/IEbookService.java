@@ -16,6 +16,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IEbookService extends IService<Ebook> {
     List<Ebook> findAllEbook(Ebook bEbook);
-
-    Ebook findEbookById(Long id);
 }

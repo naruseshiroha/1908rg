@@ -6,7 +6,8 @@ import com.example.service.IEbookService;
 
 import java.util.List;
 
-// import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 // import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -24,13 +25,11 @@ public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook> implements
 
     @Override
     public List<Ebook> findAllEbook(Ebook ebook) {
-        return baseMapper.selectList(null);
+        LambdaQueryWrapper<Ebook> lqw = new LambdaQueryWrapper<>();
+        lqw.like(!StringUtils.isEmpty(ebook.getName()), Ebook::getName, ebook.getName())
+                .like(!StringUtils.isEmpty(ebook.getDescription()), Ebook::getDescription, ebook.getDescription());
+        return baseMapper.selectList(lqw);
         // return null;
-    }
-
-    @Override
-    public Ebook findEbookById(Long id) {
-        return baseMapper.selectById(id);
     }
 
 }

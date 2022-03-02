@@ -35,12 +35,4 @@ public class EbookController {
         return json;
     }
 
-    @GetMapping("/findEbook")
-    public JsonResult<Ebook> findEbookById(Long id) {
-        JsonResult<Ebook> json = new JsonResult<>(200, "查询成功");
-        json.setData(ebookService.findEbookById(id));
-        // Ebook ebook = ebookService.findEbookById(id);
-        return json;
-    }
-
 }
