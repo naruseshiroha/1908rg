@@ -9,6 +9,7 @@ import com.example.req.EbookReq;
 import com.example.resp.EbookResp;
 import com.example.service.IEbookService;
 import com.example.utils.JsonResult;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,11 +35,9 @@ public class EbookController {
     @GetMapping("/findAllEbook")
     public JsonResult<PageInfo<EbookResp>> findAllEbook(EbookReq ebookReq) {
         JsonResult<PageInfo<EbookResp>> json = new JsonResult<>(200, "查询成功");
-        // List<EbookResp> ebookResps = 
-        PageInfo<EbookResp> pageInfo = ebookService.findAllEbook(ebookReq);
-        json.setData(pageInfo);
+        json.setData(PageHelper.startPage(ebookReq.getPageNum(), ebookReq.getPageSize())
+                .doSelectPageInfo(() -> ebookService.findAllEbook(ebookReq)));
         return json;
-
     }
 
 }

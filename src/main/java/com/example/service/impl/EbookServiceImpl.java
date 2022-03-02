@@ -11,11 +11,8 @@ import com.github.pagehelper.PageInfo;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.annotation.Resource;
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import org.springframework.beans.BeanUtils;
@@ -33,9 +30,7 @@ import org.springframework.stereotype.Service;
 public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook> implements IEbookService {
 
     @Override
-    public PageInfo<EbookResp> findAllEbook(EbookReq ebookReq) {
-        PageHelper.startPage(ebookReq.getPageNum(), ebookReq.getPageSize());
-        // Page<Ebook> page = new Page<>(ebookReq.getPageNum(), ebookReq.getPageSize());
+    public List<EbookResp> findAllEbook(EbookReq ebookReq) {
         LambdaQueryWrapper<Ebook> lqw = new LambdaQueryWrapper<>();
         lqw.like(!StringUtils.isEmpty(ebookReq.getName()), Ebook::getName,
                 ebookReq.getName())
@@ -48,9 +43,7 @@ public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook> implements
             return ebookResp;
         }).collect(Collectors.toList());
 
-        PageInfo<EbookResp> pageInfo = new PageInfo<>(ebookResps);
-
-        return pageInfo;
+        return ebookResps;
     }
 
 }
