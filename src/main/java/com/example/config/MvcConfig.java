@@ -1,8 +1,12 @@
 package com.example.config;
 
+import javax.annotation.Resource;
+
+import com.example.interceptor.LogInterceptor;
+
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -17,6 +21,18 @@ public class MvcConfig implements WebMvcConfigurer {
                 .allowedOriginPatterns("*")
                 .allowCredentials(true)
                 .maxAge(3600); // 一小时内不需要再预检
+    }
+
+    /**
+     * 拦截器
+     */
+    @Resource
+    LogInterceptor logInterceptor;
+
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(logInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/login");
     }
 
     @Override
