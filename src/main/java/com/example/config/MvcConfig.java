@@ -1,13 +1,13 @@
 package com.example.config;
 
-import javax.annotation.Resource;
+// import javax.annotation.Resource;
 
-import com.example.interceptor.LogInterceptor;
+// import com.example.interceptor.LogInterceptor;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+// import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+// import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -23,25 +23,26 @@ public class MvcConfig implements WebMvcConfigurer {
                 .maxAge(3600); // 一小时内不需要再预检
     }
 
+    // @Override
+    // public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    // registry.addResourceHandler("/**")
+    // .addResourceLocations("classpath:/static/")
+    // .addResourceLocations("classpath:/templates/");
+    // // 映射图片保存地址
+    // //
+    // registry.addResourceHandler("/img/**").addResourceLocations("file:D:/bysj/pljyd/src/main/resources/static/img/");
+    // }
+
     /**
      * 拦截器
      */
-    @Resource
-    LogInterceptor logInterceptor;
+    // @Resource
+    // LogInterceptor logInterceptor;
 
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(logInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/login");
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/")
-                .addResourceLocations("classpath:/templates/");
-        // 映射图片保存地址
-        // registry.addResourceHandler("/img/**").addResourceLocations("file:D:/bysj/pljyd/src/main/resources/static/img/");
-    }
+    // public void addInterceptors(InterceptorRegistry registry) {
+    // registry.addInterceptor(logInterceptor)
+    // .addPathPatterns("/**")
+    // .excludePathPatterns("/login");
+    // }
 
 }
