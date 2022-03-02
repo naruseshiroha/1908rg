@@ -112,8 +112,8 @@ public class EbookReq extends PageReq {
                 ", docCount=" + docCount +
                 ", viewCount=" + viewCount +
                 ", voteCount=" + voteCount +
-                ", page=" + super.getPage() +
-                ", size=" + super.getSize() +
+                ", pageNum=" + super.getPageNum() +
+                ", pageSize=" + super.getPageSize() +
                 "}";
     }
 }
