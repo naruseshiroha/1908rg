@@ -59,4 +59,8 @@ public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook> implements
         return flag;
     }
 
+    public boolean deleteById(Long id) {
+        return baseMapper.deleteById(id) > 0;
+    }
+
 }
