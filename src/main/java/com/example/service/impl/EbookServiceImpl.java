@@ -5,9 +5,12 @@ import com.example.mapper.EbookMapper;
 import com.example.req.EbookReq;
 import com.example.resp.EbookResp;
 import com.example.service.IEbookService;
+import com.example.utils.SnowFlake;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
@@ -27,6 +30,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook> implements IEbookService {
+
+    @Resource
+    private SnowFlake snowFlake;
 
     @Override
     public List<EbookResp> findAllEbook(EbookReq ebookReq) {
@@ -51,6 +57,7 @@ public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook> implements
         BeanUtils.copyProperties(ebookResp, ebook);
         if (ObjectUtils.isEmpty(ebookResp.getId())) {
             // 新增
+            ebook.setId(snowFlake.nextId());
             flag = baseMapper.insert(ebook) > 0 ? true : false;
         } else {
             // 更新
