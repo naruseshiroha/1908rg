@@ -42,7 +42,7 @@ public class Generator {
                                                 .author(scanner.apply("请输入作者名称"))
                                                 .outputDir("E:/demo/src/main/java")
                                                 .commentDate("yyyy-MM-dd")
-                                                .enableSwagger().fileOverride())
+                                                .fileOverride())
                                 .packageConfig((scanner, builder) -> builder
                                                 .parent(scanner.apply("请输入包名")) // 设置父包名
                                                 // .moduleName(scanner.apply("请输入模块名")) // 设置父包模块名
@@ -53,6 +53,7 @@ public class Generator {
                                 .strategyConfig((scanner, builder) -> builder
                                                 .addInclude(scanner.apply("请输入表名多个表名用,隔开").split(","))
                                                 .addTablePrefix("t_", "c_"))
+                                .strategyConfig((builder) -> builder.entityBuilder().enableLombok())
                                 .templateEngine(new FreemarkerTemplateEngine())
                                 .execute();
 
