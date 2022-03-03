@@ -48,7 +48,7 @@ public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook> implements
     public boolean save(EbookResp ebookResp) {
         Ebook ebook = new Ebook();
         boolean flag = false;
-        BeanUtils.copyProperties(ebook, ebookResp);
+        BeanUtils.copyProperties(ebookResp, ebook);
         if (ObjectUtils.isEmpty(ebookResp.getId())) {
             // 新增
             flag = baseMapper.insert(ebook) > 0 ? true : false;
