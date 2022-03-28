@@ -27,7 +27,7 @@ public class Generator {
          * 数据源配置
          */
         private static final DataSourceConfig.Builder DATA_SOURCE_CONFIG = new DataSourceConfig.Builder(
-                        "jdbc:mysql://127.0.0.1:3306/benkyou?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true",
+                        "jdbc:mysql://127.0.0.1:3306/1908rg?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true",
                         "root",
                         "lixunsam");
 
