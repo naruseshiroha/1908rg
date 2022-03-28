@@ -37,8 +37,8 @@ public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook> implements
     @Override
     public List<EbookResp> findAllEbook(EbookReq ebookReq) {
         LambdaQueryWrapper<Ebook> lqw = new LambdaQueryWrapper<>();
-        lqw.like(!StringUtils.isEmpty(ebookReq.getName()), Ebook::getName,
-                ebookReq.getName())
+        lqw.eq(!ObjectUtils.isNull(ebookReq.getCategory2Id()), Ebook::getCategory2Id, ebookReq.getCategory2Id())
+                .like(!StringUtils.isEmpty(ebookReq.getName()), Ebook::getName, ebookReq.getName())
                 .like(!StringUtils.isEmpty(ebookReq.getDescription()), Ebook::getDescription,
                         ebookReq.getDescription());
 
