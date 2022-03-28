@@ -33,6 +33,8 @@ build/
 .vscode/
 
 ### diy
+*.code-workspace
+sql/
 http/
 log/
 mvnw
