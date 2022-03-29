@@ -51,6 +51,12 @@ public class DocReq implements Serializable {
     private Integer sort;
 
     /**
+     * 内容
+     */
+    @NotNull(message = "【内容】不能为空")
+    private String content;
+
+    /**
      * 阅读数
      */
     private Integer viewCount;

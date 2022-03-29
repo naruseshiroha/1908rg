@@ -1,6 +1,8 @@
 package com.example.service.impl;
 
+import com.example.entity.Content;
 import com.example.entity.Doc;
+import com.example.mapper.ContentMapper;
 import com.example.mapper.DocMapper;
 import com.example.service.IDocService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -33,6 +35,9 @@ import org.springframework.beans.BeanUtils;
 public class DocServiceImpl extends ServiceImpl<DocMapper, Doc> implements IDocService {
 
     @Resource
+    private ContentMapper contentMapper;
+
+    @Resource
     private SnowFlake snowFlake;
 
     @Override
@@ -63,16 +68,27 @@ public class DocServiceImpl extends ServiceImpl<DocMapper, Doc> implements IDocS
     }
 
     public boolean save(DocResp docResp) {
-        Doc doc = new Doc();
         boolean flag = false;
+        int a = 0, b = 0;
+        Doc doc = new Doc();
+        Content content = new Content();
         BeanUtils.copyProperties(docResp, doc);
+        BeanUtils.copyProperties(docResp, content);
         if (ObjectUtils.isEmpty(docResp.getId())) {
             // 新增
             doc.setId(snowFlake.nextId());
-            flag = baseMapper.insert(doc) > 0 ? true : false;
+            a = baseMapper.insert(doc);
+            content.setId(doc.getId());
+            b = contentMapper.insert(content);
+            flag = (a > 0 && b > 0) ? true : false;
         } else {
             // 更新
-            flag = baseMapper.updateById(doc) > 0 ? true : false;
+            a = baseMapper.updateById(doc);
+            b = contentMapper.updateById(content);
+            if (b == 0) {
+                contentMapper.insert(content);
+            }
+            flag = (a > 0 && b > 0) ? true : false;
         }
         return flag;
     }

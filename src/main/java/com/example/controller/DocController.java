@@ -68,14 +68,14 @@ public class DocController {
         return json;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public JsonResult<Boolean> delete(@PathVariable Long id) {
-        JsonResult<Boolean> json = new JsonResult<>();
-        json.setData(docService.deleteById(id));
-        json.setCode(200);
-        json.setMsg("操作成功");
-        return json;
-    }
+    // @DeleteMapping("/delete/{id}")
+    // public JsonResult<Boolean> delete(@PathVariable Long id) {
+    //     JsonResult<Boolean> json = new JsonResult<>();
+    //     json.setData(docService.deleteById(id));
+    //     json.setCode(200);
+    //     json.setMsg("操作成功");
+    //     return json;
+    // }
 
     @DeleteMapping("/delete/{idsStr}")
     public JsonResult<Boolean> delete(@PathVariable String idsStr) {
