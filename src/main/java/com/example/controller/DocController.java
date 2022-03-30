@@ -1,16 +1,10 @@
 package com.example.controller;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 
-import com.example.req.DocReq;
 import com.example.resp.DocResp;
 import com.example.service.IDocService;
 import com.example.utils.JsonResult;
@@ -40,20 +34,28 @@ public class DocController {
     @GetMapping("/all")
     public JsonResult<List<DocResp>> all() {
         JsonResult<List<DocResp>> json = new JsonResult<>();
-        // json.setData(PageHelper.startPage(docReq.getPageNum(),docReq.getPageSize())
-        // .doSelectPageInfo(() -> docService.findAllDoc(docReq)));
         json.setData(docService.all());
         json.setCode(200);
         json.setMsg("操作成功");
         return json;
     }
 
-    @GetMapping("/findDoc")
-    public JsonResult<List<DocResp>> findDoc(@Valid DocReq docReq) {
+    /**
+     * 根据电子书id查询文档的方法,结果已经排好序
+     */
+    @GetMapping("/all/{ebookId}")
+    public JsonResult<List<DocResp>> all(@PathVariable Long ebookId) {
         JsonResult<List<DocResp>> json = new JsonResult<>();
-        // json.setData(PageHelper.startPage(docReq.getPageNum(),docReq.getPageSize())
-        // .doSelectPageInfo(() -> docService.findAllDoc(docReq)));
-        json.setData(docService.findDoc(docReq));
+        json.setData(docService.all(ebookId));
+        json.setCode(200);
+        json.setMsg("操作成功");
+        return json;
+    }
+
+    @GetMapping("/find-content/{id}")
+    public JsonResult<String> findContent(@PathVariable Long id) {
+        JsonResult<String> json = new JsonResult<>();
+        json.setData(docService.findContent(id));
         json.setCode(200);
         json.setMsg("操作成功");
         return json;
@@ -70,11 +72,11 @@ public class DocController {
 
     // @DeleteMapping("/delete/{id}")
     // public JsonResult<Boolean> delete(@PathVariable Long id) {
-    //     JsonResult<Boolean> json = new JsonResult<>();
-    //     json.setData(docService.deleteById(id));
-    //     json.setCode(200);
-    //     json.setMsg("操作成功");
-    //     return json;
+    // JsonResult<Boolean> json = new JsonResult<>();
+    // json.setData(docService.deleteById(id));
+    // json.setCode(200);
+    // json.setMsg("操作成功");
+    // return json;
     // }
 
     @DeleteMapping("/delete/{idsStr}")

@@ -43,6 +43,8 @@ public class DocResp implements Serializable {
      */
     private Integer sort;
 
+    private String content;
+
     /**
      * 阅读数
      */

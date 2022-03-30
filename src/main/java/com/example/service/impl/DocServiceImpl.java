@@ -8,7 +8,6 @@ import com.example.service.IDocService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
-import com.example.req.DocReq;
 import com.example.resp.DocResp;
 import com.example.utils.SnowFlake;
 
@@ -19,7 +18,6 @@ import javax.annotation.Resource;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 
 import org.springframework.beans.BeanUtils;
 
@@ -51,12 +49,11 @@ public class DocServiceImpl extends ServiceImpl<DocMapper, Doc> implements IDocS
         return docResps;
     }
 
-    public List<DocResp> findDoc(DocReq docReq) {
+    @Override
+    public List<DocResp> all(Long ebookId) {
         LambdaQueryWrapper<Doc> lqw = new LambdaQueryWrapper<>();
-        lqw.eq(!ObjectUtils.isNull(docReq.getEbookId()), Doc::getEbookId, docReq.getEbookId())
-                .eq(!ObjectUtils.isNull(docReq.getParent()), Doc::getParent, docReq.getParent())
-                .eq(!StringUtils.isEmpty(docReq.getName()), Doc::getName, docReq.getName())
-                .eq(!ObjectUtils.isNull(docReq.getSort()), Doc::getSort, docReq.getSort());
+        lqw.eq(Doc::getEbookId, ebookId)
+                .orderByAsc(Doc::getSort);
 
         List<DocResp> docResps = baseMapper.selectList(lqw).stream().map(doc -> {
             DocResp docResp = new DocResp();
@@ -65,6 +62,13 @@ public class DocServiceImpl extends ServiceImpl<DocMapper, Doc> implements IDocS
         }).collect(Collectors.toList());
 
         return docResps;
+    }
+
+    public String findContent(Long id) {
+        LambdaQueryWrapper<Content> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(!ObjectUtils.isNull(id), Content::getId, id);
+        Content content = contentMapper.selectById(id);
+        return content.getContent();
     }
 
     public boolean save(DocResp docResp) {
