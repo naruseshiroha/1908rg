@@ -37,11 +37,14 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     @Override
     public List<CategoryResp> all() {
-        List<CategoryResp> categoryResps = baseMapper.selectList(null).stream().map(category -> {
-            CategoryResp categoryResp = new CategoryResp();
-            BeanUtils.copyProperties(category, categoryResp);
-            return categoryResp;
-        }).collect(Collectors.toList());
+        LambdaQueryWrapper<Category> lqw = new LambdaQueryWrapper<>();
+        lqw.orderByAsc(Category::getSort);
+        List<CategoryResp> categoryResps = baseMapper.selectList(lqw).stream()
+                .map(category -> {
+                    CategoryResp categoryResp = new CategoryResp();
+                    BeanUtils.copyProperties(category, categoryResp);
+                    return categoryResp;
+                }).collect(Collectors.toList());
 
         return categoryResps;
     }
